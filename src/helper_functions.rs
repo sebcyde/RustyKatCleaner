@@ -11,13 +11,12 @@ pub mod helper_functions {
             let entry = entry?;
             let path = entry.path();
 
-            // Check if it's a file and add its path to the vector
             if path.is_file() {
                 file_paths.push(entry);
             }
         }
 
-        Ok(file_paths) // Return the vector directly without cloning
+        Ok(file_paths)
     }
 
     pub async fn filter_dirty_directories<'a>(

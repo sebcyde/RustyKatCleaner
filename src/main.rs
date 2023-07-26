@@ -1,5 +1,5 @@
 mod helper_functions;
-use std::{error, fs};
+use std::fs;
 
 #[tokio::main]
 async fn main() {
