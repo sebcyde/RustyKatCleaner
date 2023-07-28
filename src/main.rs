@@ -1,7 +1,11 @@
 pub mod functions {
     pub mod check_directory;
+    pub mod create_directory;
+    pub mod create_excel;
     pub mod create_subdirectory;
+    pub mod data_transfer;
     pub mod file_fisher;
+    pub mod file_functions;
     pub mod filter_dirty_directories;
     pub mod get_directory_file_paths;
     pub mod get_file_name;
@@ -16,8 +20,12 @@ pub mod functions {
 async fn main() {
     use chrono;
     use functions::check_directory::check_directory::check_directory;
+    use functions::create_excel::create_excel;
     use functions::create_subdirectory::create_subdirectory::create_subdirectory;
+    use functions::data_transfer::data_transfer::data_transfer;
+    use functions::file_functions::file_functions::*;
     // use functions::file_fisher::file_fisher::file_fisher;
+    use functions::create_directory::create_dir::create_dir;
     use functions::filter_dirty_directories::filter_dirty_directories::filter_dirty_directories;
     use functions::get_directory_file_paths::get_dir_file_paths::get_dir_file_paths;
     use functions::get_file_name::get_file_name::get_file_name;

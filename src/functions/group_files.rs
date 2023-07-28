@@ -2,10 +2,10 @@ pub mod group_files {
     use std::{collections::HashSet, path::Path};
 
     pub struct GroupedFiles {
-        pdf: Option<String>,
-        html: Option<String>,
-        csv: Option<String>,
-        section: Option<String>,
+        pub pdf: Option<String>,
+        pub html: Option<String>,
+        pub csv: Option<String>,
+        pub section: Option<String>,
     }
 
     pub async fn group_files(files: Vec<String>) -> Vec<GroupedFiles> {

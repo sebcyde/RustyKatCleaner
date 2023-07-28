@@ -11,7 +11,7 @@ pub mod check_directory {
                     eprintln!("Error creating clean container: {}", err);
                 } else {
                     println!("Created directory.");
-                    println!("New directory: {}", new_clean_directory)
+                    println!("New directory: {}", new_clean_directory);
                 }
             }
         }
