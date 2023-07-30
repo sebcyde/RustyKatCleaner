@@ -20,7 +20,6 @@ pub mod process_group {
         group: GroupedFiles,
         formatted_date: String,
         results: TestResults,
-        index: u32,
     ) {
         // Get group's company for folder organisation
         let file_name: String = get_file_name().await;

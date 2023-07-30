@@ -28,7 +28,7 @@ async fn main() {
     use functions::create_excel::create_excel;
     use functions::create_subdirectory::create_subdirectory::create_subdirectory;
     use functions::data_transfer::data_transfer::data_transfer;
-    use functions::file_data_reader::file_data_reader::ReaderBuilder;
+    use functions::file_data_reader::file_data_reader::file_data_reader;
     use functions::file_functions::file_functions::*;
     // use functions::file_fisher::file_fisher::file_fisher;
     use functions::create_directory::create_dir::create_dir;
@@ -121,20 +121,29 @@ async fn main() {
     let _failed_tests: Vec<String> = Vec::new();
     println!(" ");
 
-    // let Results: TestResults = TestResults {
-    //     total: &mut (grouped_files.len() as u32),
-    //     passed: &mut 0,
-    //     failed: &mut 0,
-    //     skipped: &mut 0,
-    // };
+    let mut results: TestResults = TestResults {
+        total: &mut (grouped_files.len() as u32),
+        passed: 0,
+        failed: 0,
+        skipped: 0,
+    };
 
-    GroupedFiles.into_iter().for_each(|group, index| {
-        process_group(new_clean_directory, group, formatted_date, results, index).await;
+    async fn process_groups(
+        new_clean_dir: String,
+        grouped_files: Vec<GroupedFiles>,
+        formatted_date: String,
+        results: TestResults,
+    ) {
+        let len = grouped_files.len();
+
+        for (index, group) in grouped_files.into_iter().enumerate() {
+            process_group(new_clean_dir, group, formatted_date, results).await;
+        }
+    }
+
+    tokio::runtime::Runtime::new().unwrap().block_on(async {
+        process_groups(new_clean_dir, group, formatted_date, results).await;
     });
-
-    // for (const [index, Group] of GroupedFiles.entries()) {
-    //     await processGroup(Group, index);
-    //   }
 
     //   await updateLogs(TestResults, LogPath, failedTests);
     //   console.log("Results:", TestResults);
