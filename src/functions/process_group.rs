@@ -107,6 +107,11 @@ pub mod process_group {
         }
 
         //       await addToLog(LogPath, Group, Result);
-        //       Result ? TestResults.Passed++ : TestResults.Failed++;
+
+        if result {
+            TestResults.Passed += 1;
+        } else {
+            TestResults.Failed += 1;
+        }
     }
 }
