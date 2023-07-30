@@ -1,9 +1,14 @@
+use functions::{
+    group_files::group_files::GroupedFiles, process_group::process_group::process_group,
+};
+
 pub mod functions {
     pub mod check_directory;
     pub mod create_directory;
     pub mod create_excel;
     pub mod create_subdirectory;
     pub mod data_transfer;
+    pub mod file_data_reader;
     pub mod file_fisher;
     pub mod file_functions;
     pub mod filter_dirty_directories;
@@ -23,6 +28,7 @@ async fn main() {
     use functions::create_excel::create_excel;
     use functions::create_subdirectory::create_subdirectory::create_subdirectory;
     use functions::data_transfer::data_transfer::data_transfer;
+    use functions::file_data_reader::file_data_reader::ReaderBuilder;
     use functions::file_functions::file_functions::*;
     // use functions::file_fisher::file_fisher::file_fisher;
     use functions::create_directory::create_dir::create_dir;
@@ -121,4 +127,15 @@ async fn main() {
     //     failed: &mut 0,
     //     skipped: &mut 0,
     // };
+
+    GroupedFiles.into_iter().for_each(|group, index| {
+        process_group(new_clean_directory, group, formatted_date, results, index).await;
+    });
+
+    // for (const [index, Group] of GroupedFiles.entries()) {
+    //     await processGroup(Group, index);
+    //   }
+
+    //   await updateLogs(TestResults, LogPath, failedTests);
+    //   console.log("Results:", TestResults);
 }

@@ -5,6 +5,8 @@ pub mod data_transfer {
     use excel::Worksheet;
     use std::error::Error;
 
+    use crate::functions::file_data_reader::file_data_reader::file_data_reader;
+
     const USER_NAME: &str = "Sebastian Cyde";
 
     pub async fn data_transfer(
@@ -17,7 +19,7 @@ pub mod data_transfer {
         println!("Starting data transfer");
 
         let current_date = chrono::Utc::today().format("%d/%m/%Y").to_string();
-        let file_data = FileDataReader::read_file(file_path)?;
+        let file_data = file_data_reader(file_path).await.unwrap();
 
         if let Some(file_data) = file_data {
             println!("Populating Excel Worksheet");
